@@ -7,7 +7,7 @@ import { WishListModule } from './wish-lists';
 import { LoginModule } from './login';
 import { UserModule } from './users';
 import { WishListService, SessionService, UserService } from './shared/services';
-
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -16,7 +16,10 @@ import { WishListService, SessionService, UserService } from './shared/services'
     LoginModule,
     WishListModule
   ],
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent
+  ],
   bootstrap: [AppComponent],
   providers: [
     Title,

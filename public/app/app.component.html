@@ -1,19 +1,31 @@
-<nav>
-  <ul>
-    <li>
-      <a routerLink="/wish-lists" routerLinkActive="active" (click)="setTitle('Home')">Home</a>
-    </li>
-    <li *ngIf="!isLoggedIn()">
-      <a routerLink="/login" routerLinkActive="active" (click)="setTitle('Login')">Login</a>
-    </li>
-    <li *ngIf="isLoggedIn()">
-      <a [routerLink]="['/users', getUserId()]" routerLinkActive="active" (click)="setTitle('Profile')">Profile</a>
-    </li>
-    <li *ngIf="isLoggedIn()">
-      <a routerLink="/dashboard" routerLinkActive="active" (click)="setTitle('Dashboard')">Dashboard</a>
-    </li>
-  </ul>
-</nav>
+<header>
+  <nav class="container">
+    <h6>Site Menu</h6>
+    <ul>
+      <li>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="setTitle('Home')">Home</a>
+      </li>
+      <li>
+        <a routerLink="/wish-lists" routerLinkActive="active" (click)="setTitle('Wish Lists')">Wish Lists</a>
+      </li>
+      <li>
+        <a routerLink="/users" routerLinkActive="active" (click)="setTitle('Users')">Users</a>
+      </li>
+      <li *ngIf="!isLoggedIn()">
+        <a routerLink="/login" routerLinkActive="active" (click)="setTitle('Login')">Login</a>
+      </li>
+    </ul>
+    <h6>User Menu</h6>
+    <ul *ngIf="isLoggedIn()">
+      <li>
+        <a [routerLink]="['/users', getUserId()]" routerLinkActive="active" (click)="setTitle('Profile')">Profile</a>
+      </li>
+      <li>
+        <a routerLink="/dashboard" routerLinkActive="active" (click)="setTitle('Dashboard')">Dashboard</a>
+      </li>
+    </ul>
+  </nav>
+</header>
 <div class="container">
   <router-outlet></router-outlet>
 </div>

@@ -1,3 +1,9 @@
 <div *ngIf="user">
   <h1>{{user.emailAddress}}</h1>
 </div>
+<h2>User's Wish Lists</h2>
+<ul>
+  <li *ngFor="let wishList of wishLists">
+    <a [routerLink]="['/wish-lists', wishList._id]">{{wishList.name}}</a>
+  </li>
+</ul>
