@@ -85,7 +85,7 @@ export class DashboardWishListsFormComponent implements OnInit {
     this.form = this.formBuilder.group({
       _id: [''],
       _user: [user._id],
-      name: ['', [<any>Validators.required, <any>Validators.minLength(5)]]
+      name: ['', [<any>Validators.required, <any>Validators.minLength(2)]]
     });
   }
 

@@ -20,6 +20,6 @@ export class DashboardWishListsComponent implements OnInit {
 
   private getWishLists(): void {
     this.wishListService.getAllByUserId(this.user._id)
-      .then(data => this.wishLists = data);
+      .then(data => this.wishLists = data.value);
   }
 }

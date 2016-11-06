@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth-guard.service';
 
-import { WishListComponent } from './wish-list.component';
-import { WishListListComponent } from './wish-list-list.component';
-import { WishListDetailComponent } from './wish-list-detail.component';
+import { WishListListComponent,
+         WishListDetailComponent,
+         WishListFormComponent } from './wish-list.components';
 
 
 const routes: Routes = [
-  { path: '',
-    component: WishListComponent,
-    children: [
-      { path: '', component: WishListListComponent },
-      { path: ':id', component: WishListDetailComponent }
-    ]
-  }
+  { path: '', component: WishListListComponent },
+  { path: 'create', component: WishListFormComponent, canActivate: [AuthGuard] },
+  { path: ':id', component: WishListDetailComponent },
+  { path: ':id/edit', component: WishListFormComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

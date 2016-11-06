@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.sessionService.login(this.form.value.emailAddress, this.form.value.password)
       .then(data => {
         this.isSubmitted = false;
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
       })
       .catch(reason => {
         this.isSubmitted = false;

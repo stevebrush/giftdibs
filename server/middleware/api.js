@@ -68,6 +68,7 @@ const wishListRouter = new CrudRouter({
 });
 
 module.exports = function (router) {
+
     permissionRouter.attach(router);
     roleRouter.attach(router);
     userRouter.attach(router);
@@ -75,7 +76,7 @@ module.exports = function (router) {
 
     router.route('/api/wish-lists/user/:id')
         .get(function (req, res, next) {
-            WishListService.getAllByUserId(req.params.id)
+            WishListService.getAllByUserId(req.params.id, req.query.doPopulate)
                 .then(function (data) {
                     utils.parseSuccess(res, data);
                 })

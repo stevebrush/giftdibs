@@ -37,6 +37,13 @@ module.exports = function (router) {
             err = new Error("Forbidden.");
             err.status = 403;
 
+            // Make sure the owner of the request body is logged into the session.
+            if (req.body._user && req.user) {
+                if (!req.user._id.equals(req.body._user)) {
+                    return err;
+                }
+            }
+
             if (!req.isAuthenticated() || !req.permissions || req.permissions.indexOf(permission) === -1) {
                 return err;
             }
@@ -69,10 +76,10 @@ module.exports = function (router) {
         })(req, res, next);
     });
 
-    router.get('/session/logout', function (req, res) {
+    router.delete('/session/logout', function (req, res) {
         req.logout();
         res.status(200).json({
-            status: 'Bye!'
+            message: 'Bye!'
         });
     });
 

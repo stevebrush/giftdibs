@@ -20,10 +20,18 @@ export class SessionService {
         let data = res.json();
         this.isLoggedIn = true;
         this.user = <IUser>data.user;
-        console.log("Set user to:", this.user);
         return data;
       })
       .catch(this.handleError);
+  }
+
+  logout(): Promise<any> {
+    return this.http.delete('/session/logout').toPromise()
+      .then(res => {
+        this.isLoggedIn = false;
+        this.user = null;
+        return res.json();
+      });
   }
 
   getUser(): IUser {

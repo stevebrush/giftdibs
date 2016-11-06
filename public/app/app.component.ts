@@ -9,6 +9,7 @@ import { IUser } from './shared/interfaces';
   styles: [require('./app.component.scss')]
 })
 export class AppComponent implements OnInit {
+  public user: IUser;
 
   constructor(
     private titleService: Title,
@@ -23,8 +24,8 @@ export class AppComponent implements OnInit {
   }
 
   getUserId(): string {
-    let user: IUser = this.sessionService.getUser();
-    return user._id;
+    this.user = this.sessionService.getUser();
+    return this.user._id;
   }
 
   setTitle(title: string): void {

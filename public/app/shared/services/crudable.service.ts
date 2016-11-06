@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { Http, URLSearchParams, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 
@@ -57,8 +57,11 @@ export abstract class CrudableService {
       .catch(this.handleError);
   }
 
-  getAll(): Promise<any[]> {
-    return this.http.get('/api/' + this.resourceName + '/')
+  getAll(doPopulate?: boolean): Promise<any> {
+    let options = new RequestOptions({
+      search: new URLSearchParams('doPopulate=' + this.parseDoPopulate(doPopulate))
+    });
+    return this.http.get('/api/' + this.resourceName + '/', options)
       .toPromise()
       .then((res: any) => {
         return res.json().value;
@@ -66,8 +69,11 @@ export abstract class CrudableService {
       .catch(this.handleError);
   }
 
-  getById(id: string): Promise<any> {
-    return this.http.get('/api/' + this.resourceName + '/' + id)
+  getById(id: string, doPopulate?: boolean): Promise<any> {
+    let options = new RequestOptions({
+      search: new URLSearchParams('doPopulate=' + this.parseDoPopulate(doPopulate))
+    });
+    return this.http.get('/api/' + this.resourceName + '/' + id, options)
       .toPromise()
       .then((res: any) => {
         return res.json();
@@ -82,6 +88,17 @@ export abstract class CrudableService {
         return res.json();
       })
       .catch(this.handleError);
+  }
+
+  parseDoPopulate(doPopulate: boolean): string {
+    switch (doPopulate) {
+      default:
+      doPopulate = true;
+      break;
+      case false:
+      break;
+    }
+    return (doPopulate) ? 'true' : 'false';
   }
 
   private handleError(error: any): Promise<any> {

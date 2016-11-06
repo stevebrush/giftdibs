@@ -5,7 +5,7 @@
   <label>Name:</label>
   <input type="text" formControlName="name">
   <small [hidden]="form.controls.name.valid || (form.controls.name.pristine && !isSubmitted)">
-    Name is required (minimum 5 characters).
+    Name is required (minimum 2 characters).
   </small>
 
   <button type="submit" [disabled]="isSubmitted || !form.valid">Submit</button>

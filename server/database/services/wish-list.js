@@ -9,12 +9,18 @@ function Service(options) {
 
 utils.mixin(Service, DatabaseObject);
 
-Service.prototype.getAllByUserId = function (id) {
-    return this.model.find({
+Service.prototype.getAllByUserId = function (id, doPopulate) {
+    return this.findMany({
         '_user': id
-    }).exec();
+    }, doPopulate);
 };
 
 module.exports = new Service({
-    model: require('../models/wish-list')
+    model: require('../models/wish-list'),
+    populate: [
+        {
+            path: '_user',
+            select: '_id, emailAddress'
+        }
+    ]
 });

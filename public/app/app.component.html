@@ -11,9 +11,6 @@
       <li>
         <a routerLink="/users" routerLinkActive="active" (click)="setTitle('Users')">Users</a>
       </li>
-      <li *ngIf="!isLoggedIn()">
-        <a routerLink="/login" routerLinkActive="active" (click)="setTitle('Login')">Login</a>
-      </li>
     </ul>
     <h6>User Menu</h6>
     <ul *ngIf="isLoggedIn()">
@@ -21,7 +18,12 @@
         <a [routerLink]="['/users', getUserId()]" routerLinkActive="active" (click)="setTitle('Profile')">Profile</a>
       </li>
       <li>
-        <a routerLink="/dashboard" routerLinkActive="active" (click)="setTitle('Dashboard')">Dashboard</a>
+        <a routerLink="/logout">Logout</a>
+      </li>
+    </ul>
+    <ul *ngIf="!isLoggedIn()">
+      <li>
+        <a routerLink="/login" routerLinkActive="active" (click)="setTitle('Login')">Login</a>
       </li>
     </ul>
   </nav>
