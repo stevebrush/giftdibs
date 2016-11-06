@@ -1,0 +1,18 @@
+<h1>Login</h1>
+<form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+  <label>Email Address</label>
+  <input type="text" formControlName="emailAddress">
+  <small [hidden]="form.controls.emailAddress.valid || (form.controls.emailAddress.pristine && !isSubmitted)">
+    Please provide a valid email address.
+  </small>
+
+  <label>Password</label>
+  <input type="password" formControlName="password">
+  <small [hidden]="form.controls.password.valid || (form.controls.password.pristine && !isSubmitted)">
+    Password must be longer than 7 characters.
+  </small>
+
+  <button type="submit" [disabled]="isSubmitted || !form.valid">Submit</button>
+  
+</form>

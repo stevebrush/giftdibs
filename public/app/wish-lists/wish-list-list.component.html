@@ -1,0 +1,6 @@
+<h1>Community Wish Lists</h1>
+<ul>
+  <li *ngFor="let wishList of wishLists">
+    <a [routerLink]="['/wish-lists', wishList._id]">{{wishList.name}}</a>
+  </li>
+</ul>

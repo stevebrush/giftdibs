@@ -1,0 +1,14 @@
+<h2 *ngIf="isEdit">Edit {{form.value.name}}</h2>
+<h2 *ngIf="!isEdit">Create Wish List</h2>
+<form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+  <label>Name:</label>
+  <input type="text" formControlName="name">
+  <small [hidden]="form.controls.name.valid || (form.controls.name.pristine && !isSubmitted)">
+    Name is required (minimum 5 characters).
+  </small>
+
+  <button type="submit" [disabled]="isSubmitted || !form.valid">Submit</button>
+  <button *ngIf="isEdit" [disabled]="isSubmitted" (click)="delete()">Delete</button>
+
+</form>

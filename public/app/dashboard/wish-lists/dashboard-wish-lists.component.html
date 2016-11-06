@@ -1,0 +1,15 @@
+<h2>Wish Lists</h2>
+<p>
+  <a [routerLink]="['/dashboard/wish-lists/create']">New</a>
+</p>
+<table>
+  <tr *ngFor="let wishList of wishLists">
+    <td>
+      {{wishList.name}}
+    </td>
+    <td>
+      <a [routerLink]="['/wish-lists', wishList._id]">View</a>
+      <a [routerLink]="['/dashboard/wish-lists', wishList._id]">Edit</a>
+    </td>
+  </tr>
+</table>
