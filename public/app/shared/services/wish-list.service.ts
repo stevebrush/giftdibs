@@ -22,7 +22,7 @@ export class WishListService extends CrudableService {
 
   getAllByUserId(id: string, doPopulate?: boolean): Promise<any> {
     let options = new RequestOptions({
-      search: new URLSearchParams('doPopulate=' + this.parseDoPopulate(doPopulate))
+      search: new URLSearchParams(this.parseDoPopulate(doPopulate))
     });
     return this.http.get('/api/wish-lists/user/' + id, options).toPromise()
       .then(data => data.json());

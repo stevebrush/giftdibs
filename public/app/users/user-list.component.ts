@@ -16,6 +16,11 @@ export class UserListComponent implements OnInit {
     this.getUsers();
   }
 
+  follow(id: string): void {
+    this.userService.follow(id)
+      .then(data => alert("Success!"));
+  }
+
   private getUsers(): void {
     this.userService.getAll()
       .then((data: any) => this.users = data);

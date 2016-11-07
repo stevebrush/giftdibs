@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { WishListService, SessionService } from '../shared/services/';
+import { IUser } from '../shared/interfaces/';
 
 @Component({
   template: require('./wish-list-form.component.html')
@@ -10,6 +11,7 @@ import { WishListService, SessionService } from '../shared/services/';
 export class WishListFormComponent implements OnInit {
 
   public form: FormGroup;
+  public user: IUser;
   public isSubmitted: boolean = false;
   public isEdit: boolean = false;
   public isReady: boolean = false;
@@ -23,6 +25,7 @@ export class WishListFormComponent implements OnInit {
     private sessionService: SessionService) { }
 
   ngOnInit(): void {
+    this.user = this.sessionService.getUser();
     this.defineFormFields();
     this.assignFormData();
   }
@@ -97,6 +100,14 @@ export class WishListFormComponent implements OnInit {
       if (id) {
         this.isEdit = true;
         this.wishListService.getById(id, false).then(data => {
+
+          // Redirect if user doesn't own the data.
+          if (data._user !== this.user._id) {
+            this.router.navigate(['/']);
+            return;
+          }
+
+          // Prefill the form if we're editing.
           (<FormGroup>this.form).patchValue(data, { onlySelf: true });
           this.isReady = true;
         });

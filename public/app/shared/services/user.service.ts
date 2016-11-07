@@ -17,4 +17,9 @@ export class UserService extends CrudableService {
       }
     });
   }
+
+  follow(id: string) {
+    return this.http.post('/api/users/follow/' + id, {}).toPromise()
+      .then((data: any) => data.json());
+  }
 }

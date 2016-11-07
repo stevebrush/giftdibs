@@ -44,12 +44,6 @@ function CrudRouter(options) {
 
     self.routes = {
         delete: [function (req, res, next) {
-            // Make sure the owner of the request body is logged into the session.
-            // if (req.body._user && req.user) {
-            //     if (req.user._id.equals(req.body._user)) {
-            //         return next("Forbidden");
-            //     }
-            // }
             return service.deleteById(req.params.id).then(function (data) {
                 utils.parseSuccess(res, data);
             }).catch(next);

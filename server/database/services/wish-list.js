@@ -10,7 +10,7 @@ function Service(options) {
 utils.mixin(Service, DatabaseObject);
 
 Service.prototype.getAllByUserId = function (id, doPopulate) {
-    return this.findMany({
+    return this.getMany({
         '_user': id
     }, doPopulate);
 };

@@ -83,6 +83,11 @@ module.exports = function (router) {
                 .catch(next);
         });
 
+    router.route('/api/users/follow/:id')
+        .post(function (req, res) {
+            utils.parseSuccess(res, {});
+        });
+
     router.route('/api/users/role/:name')
         .get(function (req, res, next) {
             UserService

@@ -1,6 +1,7 @@
 <h1>Users</h1>
 <ul>
   <li *ngFor="let user of users">
-    <a [routerLink]="['/users', user._id]">{{user.emailAddress}}</a>
+    <a [routerLink]="['/users', user._id]">{{user.emailAddress}}</a>&nbsp;
+    <button (click)="follow()">Follow</button>
   </li>
 </ul>

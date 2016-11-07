@@ -59,7 +59,7 @@ export abstract class CrudableService {
 
   getAll(doPopulate?: boolean): Promise<any> {
     let options = new RequestOptions({
-      search: new URLSearchParams('doPopulate=' + this.parseDoPopulate(doPopulate))
+      search: new URLSearchParams(this.parseDoPopulate(doPopulate))
     });
     return this.http.get('/api/' + this.resourceName + '/', options)
       .toPromise()
@@ -71,7 +71,7 @@ export abstract class CrudableService {
 
   getById(id: string, doPopulate?: boolean): Promise<any> {
     let options = new RequestOptions({
-      search: new URLSearchParams('doPopulate=' + this.parseDoPopulate(doPopulate))
+      search: new URLSearchParams(this.parseDoPopulate(doPopulate))
     });
     return this.http.get('/api/' + this.resourceName + '/' + id, options)
       .toPromise()
@@ -98,7 +98,7 @@ export abstract class CrudableService {
       case false:
       break;
     }
-    return (doPopulate) ? 'true' : 'false';
+    return (doPopulate) ? '' : 'doPopulate=false';
   }
 
   private handleError(error: any): Promise<any> {
